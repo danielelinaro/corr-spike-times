@@ -2,4 +2,4 @@
 *.m
 *.txt
 *~
-generated_correlated_spike_times
+generate_correlated_spike_times
