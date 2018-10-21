@@ -1,16 +1,16 @@
 
-SRC_DIR := .
-OBJ_DIR := .
-SRC_FILES := $(wildcard $(SRC_DIR)/*.cpp)
-OBJ_FILES := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRC_FILES))
+CFLAGS := -I/usr/local/include
 CPPFLAGS := -I/usr/local/include
 LDFLAGS := -L/usr/local/lib -l gsl -l gslcblas
 
-generate_correlated_spike_times: $(OBJ_FILES)
+generate_correlated_spike_times: erfinv.o correlatedspikes.o Correlations.o
 	g++ $(LDFLAGS) -o $@ $^
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-	g++ $(CPPFLAGS) $(CXXFLAGS) -c -o $@ $<
+%.o: %.c
+	gcc $(CFLAGS) -c -o $@ $<
+
+%.o: %.cpp
+	g++ $(CPPFLAGS) -c -o $@ $<
 
 clean:
 	rm -f *.o
