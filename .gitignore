@@ -1,0 +1,5 @@
+*.o
+*.m
+*.txt
+*~
+generated_correlated_spike_times
