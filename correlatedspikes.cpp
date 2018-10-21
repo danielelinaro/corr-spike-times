@@ -1,10 +1,7 @@
 // Generation of correlated spike trains
 // R. Brette - Nov 2007
+#include <cstdio>
 #include "correlatedspikes.h"
-
-#include <iostream>
-#include <fstream>
-using namespace std;
 
 gsl_rng *rnd;
 
@@ -639,7 +636,7 @@ int generalOptimizationMixture(double *r,int n,gsl_matrix *C,double *nu,gsl_matr
 	for(int i=0;i<2*n;i++) {
 		if (nu[i]<0.) {
 			err=1;
-                        cout << "nu[" << i << "] = " << nu[i] << " < 0." << endl;
+                        fprintf(stderr, "nu[%d] = %f < 0.\n", i, nu[i]);
                 }
         }
 	// 2) Mixture matrix in [0,1]
@@ -647,7 +644,7 @@ int generalOptimizationMixture(double *r,int n,gsl_matrix *C,double *nu,gsl_matr
 		for(int j=0;j<2*n;j++) {
 			if ((gsl_matrix_get(P,i,j)<0.) || (gsl_matrix_get(P,i,j)>1.)) {
 				err=1;
-                                cout << "P[" << i << "," << j << "] = " << gsl_matrix_get(P,i,j) << "." << endl;
+                                fprintf(stderr, "P[%d,%d] = %f.\n", i, j, gsl_matrix_get(P,i,j));
                         }
                 }
         }
