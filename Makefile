@@ -12,3 +12,6 @@ generated_correlated_spike_times: $(OBJ_FILES)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	g++ $(CPPFLAGS) $(CXXFLAGS) -c -o $@ $<
 
+clean:
+	rm -f *.o
+
