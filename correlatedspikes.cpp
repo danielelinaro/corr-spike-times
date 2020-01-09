@@ -691,7 +691,7 @@ int offlineMixture(gsl_matrix *P,double *nu,int M, int N, double tauc, double T,
 	int nsource[M];
 	double *sourceTrain[M];
 	int ntarget;
-	double targetTrain[10000];
+	double *targetTrain = new double[1000000];
 	for(int k=0;k<M;k++) {
 		nsource[k]=gsl_ran_poisson (rnd, nu[k]*wSize); // number of spikes in train k
 		sourceTrain[k]=new double[nsource[k]];
@@ -713,6 +713,8 @@ int offlineMixture(gsl_matrix *P,double *nu,int M, int N, double tauc, double T,
 	// Sort the events
 	qsort(spike,nspikes,sizeof(event),compareEvent);
 	
+        delete [] targetTrain;
+
 	for(int k=0;k<M;k++)
 		delete [] sourceTrain[k];
 		

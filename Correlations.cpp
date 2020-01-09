@@ -125,7 +125,6 @@ void generate_spike_trains(int N, double tauc, double dur, double rate_range[2])
 		fprintf(stderr, "oups\n");
 	
 	// Simulation
-	//double tauc=1.;
 	event *spike=new event[1000000];
 	int nspikes=offlineMixture(P,nu,2*N,N,tauc,dur,spike);
         fprintf(stderr, "%d spikes generated.\n", nspikes);
@@ -152,7 +151,14 @@ int main(int argc, char *argv[]) {
 	rnd = gsl_rng_alloc (T);
 
         if (argc != 6) {
-                fprintf(stderr, "Usage: %s N tauc duration rate_min rate_max\n", basename(argv[0]));
+                fprintf(stderr, "usage: %s N tauc duration rate_min rate_max\n", basename(argv[0]));
+                fprintf(stderr, "\n");
+                fprintf(stderr, "    N              number of presynaptic sources\n");
+                fprintf(stderr, "    tauc           correlation time constant (ms)\n");
+                fprintf(stderr, "    duration       interval of time over which spikes are generated (ms)\n");
+                fprintf(stderr, "    rate_min       minimum presynaptic firing rate (Hz)\n");
+                fprintf(stderr, "    rate_max       maximum presynaptic firing rate (Hz)\n");
+                fprintf(stderr, "\n");
                 exit(0);
         }
         
